@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh81induscm1f"]
+
+[ext_resource type="Texture2D" uid="uid://mvibijs72frg" path="res://scenes/environment/lock/lock.png" id="1_tepiu"]
+[ext_resource type="Script" path="res://scenes/environment/lock/lock.gd" id="1_x67b0"]
+[ext_resource type="Texture2D" uid="uid://br2f78ky4pp8r" path="res://images/A_Key.png" id="2_e75a6"]
+[ext_resource type="AudioStream" uid="uid://bxu76to1su25g" path="res://audio/lock.mp3" id="4_qjjth"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5fq0"]
+size = Vector2(18, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3db6l"]
+size = Vector2(29, 26)
+
+[node name="Lock" type="StaticBody2D"]
+script = ExtResource("1_x67b0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o5fq0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_tepiu")
+
+[node name="InteractHint" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = -4.0
+offset_top = -20.0
+offset_right = 4.0
+offset_bottom = -12.0
+texture = ExtResource("2_e75a6")
+stretch_mode = 2
+
+[node name="Interact" type="Area2D" parent="." groups=["lock"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_3db6l")
+
+[node name="LockAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qjjth")
+
+[connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="Interact" to="." method="_on_interact_area_exited"]

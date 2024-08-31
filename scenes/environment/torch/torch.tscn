@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://dcxux0dwv24pb"]
+
+[ext_resource type="Texture2D" uid="uid://dqs3b1uy0c5rp" path="res://scenes/environment/torch/torch.png" id="1_8obrp"]
+[ext_resource type="Script" path="res://scenes/environment/torch/torch.gd" id="1_v56t4"]
+[ext_resource type="Texture2D" uid="uid://br2f78ky4pp8r" path="res://images/A_Key.png" id="3_5qxfx"]
+[ext_resource type="Texture2D" uid="uid://goleon55uh3m" path="res://images/light_texture_gradual.png" id="4_3abw4"]
+[ext_resource type="AudioStream" uid="uid://covm2r53tqq54" path="res://audio/flame.mp3" id="5_mpucj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ro2mi"]
+atlas = ExtResource("1_8obrp")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd0dd"]
+atlas = ExtResource("1_8obrp")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ndboc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ro2mi")
+}],
+"loop": true,
+"name": &"lit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd0dd")
+}],
+"loop": true,
+"name": &"unlit",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oij4h"]
+size = Vector2(40, 40)
+
+[node name="Torch" type="Node2D" groups=["torch"]]
+script = ExtResource("1_v56t4")
+
+[node name="InteractHint" type="TextureRect" parent="."]
+texture_filter = 1
+offset_left = 7.0
+offset_top = -10.0
+offset_right = 15.0
+offset_bottom = -2.0
+texture = ExtResource("3_5qxfx")
+stretch_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ndboc")
+animation = &"unlit"
+
+[node name="Interact" type="Area2D" parent="." groups=["torch"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+shape = SubResource("RectangleShape2D_oij4h")
+debug_color = Color(0, 0.643137, 0.74902, 0.0431373)
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+
+[node name="TextureLight" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -2)
+color = Color(1, 0.923, 0.79, 1)
+energy = 2.0
+texture = ExtResource("4_3abw4")
+texture_scale = 2.0
+
+[node name="ShadowLight" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -2)
+color = Color(1, 0.923, 0.79, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = ExtResource("4_3abw4")
+texture_scale = 2.0
+
+[node name="FlameAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mpucj")
+volume_db = -3.0
+
+[connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="Interact" to="." method="_on_interact_area_exited"]

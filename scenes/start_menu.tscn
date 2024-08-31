@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0r1o3m25aips"]
+
+[ext_resource type="Script" path="res://scenes/start_menu.gd" id="1_qw63k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p8p70"]
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_p47wi"]
+font_size = 26
+
+[node name="StartMenu" type="Node"]
+script = ExtResource("1_qw63k")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [353.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.133333, 0.25098, 1)
+
+[node name="Title" type="Label" parent="."]
+offset_left = 427.0
+offset_top = 312.0
+offset_right = 853.0
+offset_bottom = 395.0
+text = "Light and Dark"
+label_settings = SubResource("LabelSettings_p8p70")
+
+[node name="Prompt" type="Label" parent="."]
+offset_left = 568.0
+offset_top = 422.0
+offset_right = 711.0
+offset_bottom = 458.0
+pivot_offset = Vector2(72, 18)
+text = "Press Enter"
+label_settings = SubResource("LabelSettings_p47wi")
+horizontal_alignment = 1

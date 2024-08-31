@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://dvtmbu6yl3wah"]
+
+[ext_resource type="Texture2D" uid="uid://84a4sef835l8" path="res://scenes/player/player.png" id="1_praor"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rwkrc"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="3_ctws3"]
+[ext_resource type="Script" path="res://components/states/state_idle.gd" id="4_jq2rf"]
+[ext_resource type="Script" path="res://components/states/state_run.gd" id="5_1bu1w"]
+[ext_resource type="Script" path="res://components/states/state_air.gd" id="6_q0kpm"]
+[ext_resource type="Script" path="res://components/states/state_climb.gd" id="7_5sksq"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="7_t7u8g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4plaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_praor")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xm4y"]
+size = Vector2(14, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mevdj"]
+size = Vector2(16, 16.3333)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+script = ExtResource("1_rwkrc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4plaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7xm4y")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_ctws3")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_jq2rf")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("5_1bu1w")
+
+[node name="Air" type="Node" parent="StateMachine"]
+script = ExtResource("6_q0kpm")
+
+[node name="Climbing" type="Node" parent="StateMachine"]
+script = ExtResource("7_5sksq")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_t7u8g")
+
+[node name="Interact" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+position = Vector2(0, 0.166667)
+shape = SubResource("RectangleShape2D_mevdj")
+
+[connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="Interact" to="." method="_on_interact_area_exited"]

@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://drppih0tmbe22"]
+
+[ext_resource type="PackedScene" uid="uid://dvtmbu6yl3wah" path="res://scenes/player/player.tscn" id="1_6dtcw"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_414w4"]
+[ext_resource type="Texture2D" uid="uid://dkp7is6sf3j3l" path="res://scenes/environment/key/key.png" id="4_65bey"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_05upm"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_ewo2p"]
+font_size = 26
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_414w4")
+
+[node name="Player" parent="." instance=ExtResource("1_6dtcw")]
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="NextLevelTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TitleTimer" type="Timer" parent="."]
+
+[node name="LevelTitle" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="LevelTitle"]
+offset_left = 573.0
+offset_top = 119.0
+offset_right = 733.0
+offset_bottom = 186.0
+size_flags_horizontal = 4
+text = "Level 1"
+label_settings = SubResource("LabelSettings_05upm")
+horizontal_alignment = 1
+
+[node name="Line2D" type="Line2D" parent="LevelTitle"]
+position = Vector2(23, -7)
+points = PackedVector2Array(510, 191, 653.831, 191, 750, 191)
+width = 3.0
+
+[node name="KeyHUD" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="KeyHUD"]
+offset_left = 74.0
+offset_top = 42.0
+offset_right = 114.0
+offset_bottom = 78.0
+text = "x 0"
+label_settings = SubResource("LabelSettings_ewo2p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="KeyHUD"]
+texture_filter = 1
+offset_left = 33.0
+offset_top = 39.0
+offset_right = 73.0
+offset_bottom = 79.0
+texture = ExtResource("4_65bey")
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="lit_torch" from="Player" to="." method="_on_player_lit_torch"]
+[connection signal="opened_door" from="Player" to="." method="_on_player_opened_door"]
+[connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="TitleTimer" to="." method="_on_title_timer_timeout"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://c46pij5lpayuv"]
+
+[ext_resource type="Script" path="res://scenes/mobs/mob1/mob_1.gd" id="1_574je"]
+[ext_resource type="Texture2D" uid="uid://c16nan6snfg03" path="res://scenes/mobs/mob1/mob1_b.png" id="2_wuh6l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8k4rp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wuh6l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_toops"]
+size = Vector2(12, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m4a7v"]
+size = Vector2(2, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vc62"]
+size = Vector2(2, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moiuc"]
+size = Vector2(12, 11)
+
+[node name="Mob1" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_574je")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8k4rp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_toops")
+
+[node name="MovementTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Left_Sensor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Sensor"]
+position = Vector2(-6, 3)
+shape = SubResource("RectangleShape2D_m4a7v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Right_Sensor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Sensor"]
+position = Vector2(6, 3)
+shape = SubResource("RectangleShape2D_0vc62")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_moiuc")
+
+[connection signal="timeout" from="MovementTimer" to="." method="_on_movement_timer_timeout"]
+[connection signal="area_entered" from="Left_Sensor" to="." method="_on_left_sensor_area_entered"]
+[connection signal="area_exited" from="Left_Sensor" to="." method="_on_left_sensor_area_exited"]
+[connection signal="area_entered" from="Right_Sensor" to="." method="_on_right_sensor_area_entered"]
+[connection signal="area_exited" from="Right_Sensor" to="." method="_on_right_sensor_area_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

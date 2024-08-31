@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx5aq5yhh61a2"]
+
+[ext_resource type="Script" path="res://scenes/splash_screen.gd" id="1_6lst5"]
+[ext_resource type="Texture2D" uid="uid://cgj7476ay33fx" path="res://images/GWJ/72-light-n-dark.png" id="2_vqy0l"]
+[ext_resource type="Texture2D" uid="uid://dhefkw01out4n" path="res://images/GWJ/duck-around.png" id="3_3w5r3"]
+[ext_resource type="Texture2D" uid="uid://benefxr237aon" path="res://images/GWJ/GWJ-Half-Logo-Orange.svg" id="3_si67c"]
+
+[node name="SplashScreen" type="Node"]
+script = ExtResource("1_6lst5")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1164.0
+offset_bottom = 720.0
+color = Color(0.0784314, 0.133333, 0.25098, 1)
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="AscensionCard" type="Sprite2D" parent="Graphics"]
+position = Vector2(640, 428)
+scale = Vector2(0.105812, 0.105812)
+texture = ExtResource("2_vqy0l")
+
+[node name="WildCard" type="Sprite2D" parent="Graphics"]
+visible = false
+position = Vector2(640, 573)
+scale = Vector2(0.128864, 0.128864)
+texture = ExtResource("3_3w5r3")
+
+[node name="WildJam" type="Sprite2D" parent="Graphics"]
+texture_filter = 1
+position = Vector2(640, 225)
+texture = ExtResource("3_si67c")
+
+[node name="Timer1" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer1" to="." method="_on_timer_timeout"]

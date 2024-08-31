@@ -1,0 +1,174 @@
+[gd_scene load_steps=25 format=3 uid="uid://dvtmbu6yl3wah"]
+
+[ext_resource type="Texture2D" uid="uid://84a4sef835l8" path="res://scenes/player/player.png" id="1_praor"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rwkrc"]
+[ext_resource type="Texture2D" uid="uid://goleon55uh3m" path="res://images/light_texture_gradual.png" id="3_6aa7j"]
+[ext_resource type="Script" path="res://components/states/state_machine.gd" id="3_ctws3"]
+[ext_resource type="Script" path="res://components/states/state_idle.gd" id="4_jq2rf"]
+[ext_resource type="Script" path="res://components/states/state_run.gd" id="5_1bu1w"]
+[ext_resource type="Script" path="res://components/states/state_exit.gd" id="5_xocmt"]
+[ext_resource type="Script" path="res://components/states/state_air.gd" id="6_q0kpm"]
+[ext_resource type="Script" path="res://components/states/state_climb.gd" id="7_5sksq"]
+[ext_resource type="Script" path="res://components/health_component.gd" id="7_t7u8g"]
+[ext_resource type="Script" path="res://components/states/state_die.gd" id="9_kbufy"]
+[ext_resource type="AudioStream" uid="uid://tyuphctwn6uf" path="res://audio/running.mp3" id="12_47dqe"]
+[ext_resource type="AudioStream" uid="uid://bire5rjt42wc5" path="res://audio/climbing.mp3" id="13_6gbgl"]
+[ext_resource type="AudioStream" uid="uid://dtgfkwbrdecpa" path="res://audio/landing.mp3" id="14_wilm7"]
+[ext_resource type="AudioStream" uid="uid://c4bxvpiv7sgac" path="res://audio/hit.mp3" id="15_qktho"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30efv"]
+atlas = ExtResource("1_praor")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmqv2"]
+atlas = ExtResource("1_praor")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr58v"]
+atlas = ExtResource("1_praor")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q21ut"]
+atlas = ExtResource("1_praor")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbje0"]
+atlas = ExtResource("1_praor")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycdn0"]
+atlas = ExtResource("1_praor")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4plaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30efv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmqv2")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pr58v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_q21ut")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_jbje0")
+}, {
+"duration": 0.75,
+"texture": SubResource("AtlasTexture_ycdn0")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_jbje0")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7xm4y"]
+size = Vector2(10, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mevdj"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+script = ExtResource("1_rwkrc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4plaa")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_7xm4y")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.921569, 0.788235, 1)
+texture = ExtResource("3_6aa7j")
+texture_scale = 1.5
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_ctws3")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_jq2rf")
+
+[node name="Exit" type="Node" parent="StateMachine"]
+script = ExtResource("5_xocmt")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("5_1bu1w")
+
+[node name="Air" type="Node" parent="StateMachine"]
+script = ExtResource("6_q0kpm")
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource("9_kbufy")
+
+[node name="Climbing" type="Node" parent="StateMachine"]
+script = ExtResource("7_5sksq")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("7_t7u8g")
+
+[node name="Interact" type="Area2D" parent="." groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+position = Vector2(0, -1.58946e-07)
+shape = SubResource("RectangleShape2D_mevdj")
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+
+[node name="TextureLight" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -2)
+color = Color(1, 0.923, 0.79, 1)
+texture = ExtResource("3_6aa7j")
+texture_scale = 1.5
+
+[node name="ShadowLight" type="PointLight2D" parent="Lights"]
+position = Vector2(0, -2)
+color = Color(1, 0.923, 0.79, 1)
+energy = 0.2
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = ExtResource("3_6aa7j")
+texture_scale = 1.5
+
+[node name="RunningAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_47dqe")
+volume_db = -10.305
+
+[node name="ClimbingAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_6gbgl")
+volume_db = -9.291
+
+[node name="LandingAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_wilm7")
+volume_db = -10.0
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_qktho")
+volume_db = 9.369
+pitch_scale = 1.47
+
+[connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="Interact" to="." method="_on_interact_area_exited"]
