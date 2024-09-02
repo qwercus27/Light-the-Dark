@@ -3,13 +3,16 @@ extends CharacterBody2D
 
 signal grabbed_ladder
 signal released_ladder
+signal grabbed_box
 signal lit_torch
 signal opened_door
 signal hit
 
 var speed = 200.0
+var push_speed = 100.0
 var ladder_speed = 150.0
 var jump_v = -350.0
+var can_push = false
 var can_climb = false
 var can_descend = false
 var can_drop = false
@@ -19,6 +22,7 @@ var can_unlock = false
 var current_one_way
 var current_torch
 var current_lock
+var current_box
 
 var key_count = 0
 
@@ -43,7 +47,11 @@ func _physics_process(delta):
 
 		if Input.is_action_pressed("up"):
 			grabbed_ladder.emit()
-		
+	
+	if can_push:
+		if Input.is_action_just_pressed("a"):
+			grabbed_box.emit()
+			
 	if can_drop:
 		if Input.is_action_just_pressed("down"):
 			current_one_way.pass_through_platform()
@@ -68,6 +76,7 @@ func _physics_process(delta):
 		#if(can_drop == true):
 			#print("cannot drop")
 		#can_drop = false
+		
 
 
 func _on_interact_area_entered(area):
@@ -81,7 +90,9 @@ func _on_interact_area_entered(area):
 		current_torch = area.get_parent()
 		if not current_torch.get_node("Lights").visible:
 			can_light = true
-		
+	if area.is_in_group("box"):
+		can_push = true
+		current_box = area.get_parent()
 	if area.is_in_group("door"):
 		can_open = true
 	if area.is_in_group("key"):
@@ -108,6 +119,8 @@ func _on_interact_area_exited(area):
 		can_open = false
 	if area.is_in_group("lock"):
 		can_unlock = false
+	if area.is_in_group("box"):
+		can_push = false
 		
 func exit(x_pos):
 	$StateMachine.transition_to("Exit", {door_x = x_pos})

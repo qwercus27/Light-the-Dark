@@ -11,13 +11,11 @@ func _process(delta):
 	pass
 	
 
-
-
 func _on_interact_area_area_entered(area):
 	if area.is_in_group("player"):
 		visible = false
 		$KeyAudio.play()
 
-	
+
 func _on_key_audio_finished():
 	queue_free()

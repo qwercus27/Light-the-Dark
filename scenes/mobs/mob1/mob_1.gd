@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 const SPEED = 50
 
 var direction
@@ -71,5 +70,5 @@ func _on_right_sensor_area_exited(area):
 	right_blocked = false
 
 func _on_hitbox_area_entered(area):
-	if area.is_in_group("player"):
+	if area.is_in_group("player_hurtbox"):
 		area.get_parent().get_hit()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://87ks78rsj6hm"]
+[gd_scene load_steps=18 format=3 uid="uid://87ks78rsj6hm"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_ord5s"]
 [ext_resource type="PackedScene" uid="uid://bv68f1qu7blvt" path="res://scenes/environment/key/key.tscn" id="3_en03i"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dcxux0dwv24pb" path="res://scenes/environment/torch/torch.tscn" id="5_mrbfi"]
 [ext_resource type="PackedScene" uid="uid://bh81induscm1f" path="res://scenes/environment/lock/lock.tscn" id="6_4pb54"]
 [ext_resource type="PackedScene" uid="uid://b8u477mm8io5m" path="res://scenes/environment/door/door.tscn" id="6_ns1ne"]
+[ext_resource type="PackedScene" uid="uid://us4733pbf80f" path="res://scenes/environment/box/box.tscn" id="8_hyp3m"]
 [ext_resource type="PackedScene" uid="uid://c46pij5lpayuv" path="res://scenes/mobs/mob1/mob_1.tscn" id="8_v1bpx"]
 [ext_resource type="Texture2D" uid="uid://0a3oewh432m7" path="res://images/tileset_2.png" id="9_5eytx"]
 [ext_resource type="Texture2D" uid="uid://bnjuhfiip5337" path="res://images/brick_tile.png" id="9_etsyd"]
@@ -574,6 +575,7 @@ scenes/1/scene = ExtResource("4_hj5ar")
 scenes/2/scene = ExtResource("5_mrbfi")
 scenes/3/scene = ExtResource("6_ns1ne")
 scenes/4/scene = ExtResource("6_4pb54")
+scenes/5/scene = ExtResource("8_hyp3m")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_urbuc"]
 resource_name = "Mobs"
@@ -589,6 +591,7 @@ texture = ExtResource("9_etsyd")
 [sub_resource type="TileSet" id="TileSet_af13f"]
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 7
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.819608, 0.25098, 1)

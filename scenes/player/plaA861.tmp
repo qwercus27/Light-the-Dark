@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dvtmbu6yl3wah"]
+[gd_scene load_steps=26 format=3 uid="uid://dvtmbu6yl3wah"]
 
 [ext_resource type="Texture2D" uid="uid://84a4sef835l8" path="res://scenes/player/player.png" id="1_praor"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rwkrc"]
@@ -11,12 +11,11 @@
 [ext_resource type="Script" path="res://components/states/state_climb.gd" id="7_5sksq"]
 [ext_resource type="Script" path="res://components/health_component.gd" id="7_t7u8g"]
 [ext_resource type="Script" path="res://components/states/state_die.gd" id="9_kbufy"]
-[ext_resource type="Script" path="res://components/states/state_push.gd" id="11_lhwxf"]
+[ext_resource type="Script" path="res://scenes/player/Push.gd" id="11_4so7l"]
 [ext_resource type="AudioStream" uid="uid://tyuphctwn6uf" path="res://audio/running.mp3" id="12_47dqe"]
 [ext_resource type="AudioStream" uid="uid://bire5rjt42wc5" path="res://audio/climbing.mp3" id="13_6gbgl"]
 [ext_resource type="AudioStream" uid="uid://dtgfkwbrdecpa" path="res://audio/landing.mp3" id="14_wilm7"]
 [ext_resource type="AudioStream" uid="uid://c4bxvpiv7sgac" path="res://audio/hit.mp3" id="15_qktho"]
-[ext_resource type="AudioStream" uid="uid://dge5fi0po51lr" path="res://audio/push.mp3" id="17_sx3w0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_30efv"]
 atlas = ExtResource("1_praor")
@@ -29,22 +28,6 @@ region = Rect2(64, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_pr58v"]
 atlas = ExtResource("1_praor")
 region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tekts"]
-atlas = ExtResource("1_praor")
-region = Rect2(80, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ttxu0"]
-atlas = ExtResource("1_praor")
-region = Rect2(96, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpr5f"]
-atlas = ExtResource("1_praor")
-region = Rect2(112, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lsg7q"]
-atlas = ExtResource("1_praor")
-region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q21ut"]
 atlas = ExtResource("1_praor")
@@ -80,29 +63,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_tekts")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ttxu0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpr5f")
-}, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_lsg7q")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpr5f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ttxu0")
-}],
-"loop": true,
-"name": &"push",
-"speed": 10.0
-}, {
-"frames": [{
 "duration": 0.75,
 "texture": SubResource("AtlasTexture_q21ut")
 }, {
@@ -123,28 +83,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xm4y"]
 size = Vector2(10, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7sdk"]
-size = Vector2(10.6667, 14.6667)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mevdj"]
-size = Vector2(15, 14.6667)
+size = Vector2(10.6667, 14.6667)
 
 [node name="Player" type="CharacterBody2D"]
 texture_filter = 1
 scale = Vector2(3, 3)
-collision_layer = 2
-collision_mask = 7
 script = ExtResource("1_rwkrc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4plaa")
-animation = &"push"
-frame_progress = 0.0959534
+animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_7xm4y")
-debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(1, 0.921569, 0.788235, 1)
@@ -174,28 +127,18 @@ script = ExtResource("9_kbufy")
 script = ExtResource("7_5sksq")
 
 [node name="Push" type="Node" parent="StateMachine"]
-script = ExtResource("11_lhwxf")
+script = ExtResource("11_4so7l")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_t7u8g")
-
-[node name="Hurtbox" type="Area2D" parent="." groups=["player_hurtbox"]]
-collision_layer = 2
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, 1)
-shape = SubResource("RectangleShape2D_m7sdk")
-debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Interact" type="Area2D" parent="." groups=["player"]]
 collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
-position = Vector2(-0.166667, -0.333333)
+position = Vector2(0, -1.58946e-07)
 shape = SubResource("RectangleShape2D_mevdj")
-debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Lights" type="Node2D" parent="."]
 visible = false
@@ -233,10 +176,11 @@ stream = ExtResource("15_qktho")
 volume_db = 9.369
 pitch_scale = 1.47
 
-[node name="PushAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("17_sx3w0")
-volume_db = -8.433
-pitch_scale = 1.14
+[node name="Hurtbox" type="Area2D" parent="." groups=["player_hurtbox"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(2.38419e-07, 1)
+shape = SubResource("RectangleShape2D_mevdj")
 
 [connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
 [connection signal="area_exited" from="Interact" to="." method="_on_interact_area_exited"]

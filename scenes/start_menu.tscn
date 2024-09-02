@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0r1o3m25aips"]
+[gd_scene load_steps=5 format=3 uid="uid://b0r1o3m25aips"]
 
 [ext_resource type="Script" path="res://scenes/start_menu.gd" id="1_qw63k"]
+[ext_resource type="Texture2D" uid="uid://goleon55uh3m" path="res://images/light_texture_gradual.png" id="2_me42o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_p8p70"]
 font_size = 60
@@ -23,7 +24,7 @@ offset_left = 427.0
 offset_top = 312.0
 offset_right = 853.0
 offset_bottom = 395.0
-text = "Light and Dark"
+text = "Light the Dark"
 label_settings = SubResource("LabelSettings_p8p70")
 
 [node name="Prompt" type="Label" parent="."]
@@ -35,3 +36,28 @@ pivot_offset = Vector2(72, 18)
 text = "Press Enter"
 label_settings = SubResource("LabelSettings_p47wi")
 horizontal_alignment = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="Lights" type="Node2D" parent="."]
+position = Vector2(640, 353)
+
+[node name="TextureLight" type="PointLight2D" parent="Lights"]
+position = Vector2(-7.62939e-06, 0)
+scale = Vector2(1.5, 0.732)
+color = Color(1, 0.923, 0.79, 1)
+energy = 2.0
+texture = ExtResource("2_me42o")
+texture_scale = 11.95
+
+[node name="ShadowLight" type="PointLight2D" parent="Lights"]
+visible = false
+position = Vector2(0, -2)
+color = Color(1, 0.923, 0.79, 1)
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+texture = ExtResource("2_me42o")
+texture_scale = 2.0

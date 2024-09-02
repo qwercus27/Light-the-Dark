@@ -12,6 +12,8 @@ size = Vector2(18, 16)
 size = Vector2(29, 26)
 
 [node name="Lock" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_x67b0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,6 +24,7 @@ texture_filter = 1
 texture = ExtResource("1_tepiu")
 
 [node name="InteractHint" type="TextureRect" parent="."]
+visible = false
 texture_filter = 1
 offset_left = -4.0
 offset_top = -20.0

@@ -10,6 +10,7 @@ func _ready() -> void:
 	assert(player != null)
 	player.get_node("HealthComponent").damaged.connect(on_damaged)
 	player.grabbed_ladder.connect(on_grabbed_ladder)
+	player.grabbed_box.connect(on_grabbed_box)
 	#player.bounce_activated.connect(on_bounce_activated)
 
 
@@ -24,7 +25,8 @@ func on_damaged():
 func on_bounce_activated():
 	state_machine.transition_to("Air")
 
-
+func on_grabbed_box():
+	state_machine.transition_to("Push")
 
 
 

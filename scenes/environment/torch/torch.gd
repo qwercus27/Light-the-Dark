@@ -9,7 +9,7 @@ var ratio
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.set_animation("unlit")
-	$InteractHint.visible = false
+	hide_hint()
 	ratio = $Lights/ShadowLight.energy / $Lights/TextureLight.energy
 
 
@@ -24,7 +24,7 @@ func interact():
 		$FlameAudio.play()
 	$Lights.visible = true
 	$AnimatedSprite2D.set_animation("lit")
-	$InteractHint.visible = false
+	hide_hint()
 
 func show_hint():
 	$InteractHint.visible = true
@@ -35,10 +35,11 @@ func hide_hint():
 func turn_on():
 	$Lights.visible = true
 	$AnimatedSprite2D.set_animation("lit")
-	$InteractHint.visible = false
+	hide_hint()
 	
 func _on_interact_area_entered(area):
 	if area.is_in_group("player"):
+
 		if $AnimatedSprite2D.animation == "unlit":
 			show_hint()
 

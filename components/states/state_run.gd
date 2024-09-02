@@ -26,7 +26,6 @@ func physics_update(delta: float) -> void:
 	
 	player.velocity.y += player.gravity * delta
 
-
 	player.move_and_slide()
 	
 	if Input.is_action_just_pressed("space"):
