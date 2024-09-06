@@ -29,6 +29,8 @@ height = 12.0
 
 [node name="Mob1" type="CharacterBody2D"]
 texture_filter = 1
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("1_574je")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -56,6 +58,8 @@ shape = SubResource("RectangleShape2D_0vc62")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 3)

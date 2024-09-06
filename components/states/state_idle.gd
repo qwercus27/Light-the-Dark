@@ -5,14 +5,10 @@ func enter(_msg := {}) -> void:
 
 	player.velocity = Vector2.ZERO
 	player.get_node("AnimatedSprite2D").play("idle")
-	print("entered idle state")
 	
 	
 func update(delta: float) -> void:
-	
-#	player.velocity.y += player.gravity * delta
-#	player.move_and_slide()
-	
+		
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
 		return

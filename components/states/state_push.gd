@@ -12,29 +12,33 @@ var sprite
 var initial_push_db
 
 func enter(_msg := {}) -> void:
-	print("entered push state")
+
 	sprite = player.get_node("AnimatedSprite2D")
 	sprite.play("push")
+	
 	push_audio = player.get_node("PushAudio")
 	initial_push_db = push_audio.volume_db
 	push_audio.play()
 	player.get_node("RunningAudio").stop()
+	
 	box = player.current_box
 	box.hit_block.connect(on_hit_block)
 	box.cleared_block.connect(on_cleared_block)
 	box.hide_hint()
 	box_pos = box.position.x
+	box.shrink_collision_box()
+	
 	if(box_pos*3 > player.position.x):
 		box_rel_pos = 1
 	else:
 		box_rel_pos = -1
-	print(box_rel_pos)
-	#player.get_node("RunningAudio").play()
+
 
 func physics_update(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
+		box.shrink_collision_box()
 		push_audio.stop()
 		return
 	
@@ -57,17 +61,13 @@ func physics_update(delta: float) -> void:
 
 	player.move_and_slide()
 	
-	print("right clear: " + str(right_clear) + " left_clear: " + str(left_clear))
-	#for i in player.get_slide_collision_count():
-		#var c = player.get_slide_collision(i)
-		#if c.get_collider() is RigidBody2D:
-			#c.get_collider().apply_central_impulse(-c.get_normal() * 10)
 	
 	if not Input.is_action_pressed("a"):
-		#push_audio.stop()
+
 		box.show_hint()
 		push_audio.stop()
 		push_audio.volume_db = initial_push_db
+		box.reset_collision_box()
 		state_machine.transition_to("Idle")
 		
 	if fade_audio:
@@ -78,7 +78,6 @@ func physics_update(delta: float) -> void:
 			push_audio.volume_db = initial_push_db
 			fade_audio = false
 
-	
 
 func on_hit_block():
 
@@ -88,8 +87,9 @@ func on_hit_block():
 		left_clear = false
 	fade_audio = true
 
+
 func on_cleared_block():
 	right_clear = true
 	left_clear = true
-	
+
 

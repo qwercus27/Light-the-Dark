@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bxu76to1su25g" path="res://audio/lock.mp3" id="4_qjjth"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5fq0"]
-size = Vector2(18, 16)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3db6l"]
 size = Vector2(29, 26)

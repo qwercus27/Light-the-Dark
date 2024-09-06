@@ -45,7 +45,9 @@ func _process(delta):
 		
 	$KeyHUD/Label.text = "x " + str($Player.key_count)
 
-
+	if Input.is_action_just_pressed("k"):
+		$Player.key_count += 1
+		
 func camera_control():
 	
 	$Camera.position.x = $Player.position.x

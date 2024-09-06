@@ -14,7 +14,6 @@ size = Vector2(16, 16)
 size = Vector2(16, 16)
 
 [node name="Box" type="RigidBody2D"]
-z_index = 1
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_grcse")
@@ -22,13 +21,16 @@ script = ExtResource("1_hklah")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(3, 3)
 texture = ExtResource("1_h8e2c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
 shape = SubResource("RectangleShape2D_8wpt4")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Interact" type="Area2D" parent="." groups=["box"]]
+scale = Vector2(3, 3)
 collision_layer = 4
 collision_mask = 7
 
@@ -40,9 +42,9 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 visible = false
 texture_filter = 1
 offset_left = -4.0
-offset_top = -20.86
+offset_top = -21.0
 offset_right = 4.0
-offset_bottom = -12.86
+offset_bottom = -13.0
 texture = ExtResource("3_vebps")
 stretch_mode = 2
 
