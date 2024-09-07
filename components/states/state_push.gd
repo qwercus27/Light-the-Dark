@@ -37,6 +37,12 @@ func enter(_msg := {}) -> void:
 
 func physics_update(delta: float) -> void:
 	
+	if not player.can_push:
+		state_machine.transition_to("Idle")
+		box.reset_collision_box(box_rel_pos)
+		push_audio.stop()
+		return
+		
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
 		box.shrink_collision_box(box_rel_pos)
