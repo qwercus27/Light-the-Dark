@@ -8,23 +8,34 @@ light and dark
 	- or silhouettes
 
 
-- puzzles are centered around illuminating the map for your traversal?
-	- torches / braziers
-	- fire arrows
-	- electric lights / switches
-	- windows / "curtain" switches
-	- glowing mobs
-	- lava
-	- gates, need switch
-	- switch activates one item, deactivates another
-	- push blocks - opens one path, closes another
-	- mob guarding light source
-	- light generating mob behind gate
+- torches / braziers
+- fire arrows
+- electric lights / switches
+- windows / "curtain" switches
+- glowing mobs
+- lava
+- gates, need switch
+- switch activates one item, deactivates another
+- push blocks - opens one path, closes another
+- mob guarding light source
+- light generating mob behind gate
+
+- level select menu
+- pause menu
+- reset level option
+- testing modes: move camera, turn on directional light, fly, turn off player collision
 
 - mob purpose?
 	- moving light source
 	- instant death? --> reset level?
 
+- push block uses:
+	- reach platform
+	- reach ladder
+	- reach torch
+	- rest on switch
+	- clear a path
+		- multiple blocks in one spot
 next:
 
-- push blocks
+- gate and switch

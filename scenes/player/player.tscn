@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dvtmbu6yl3wah"]
+[gd_scene load_steps=33 format=3 uid="uid://dvtmbu6yl3wah"]
 
 [ext_resource type="Texture2D" uid="uid://84a4sef835l8" path="res://scenes/player/player.png" id="1_praor"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_rwkrc"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://components/states/state_die.gd" id="9_kbufy"]
 [ext_resource type="Script" path="res://components/states/state_push.gd" id="11_lhwxf"]
 [ext_resource type="AudioStream" uid="uid://tyuphctwn6uf" path="res://audio/running.mp3" id="12_47dqe"]
+[ext_resource type="Script" path="res://scenes/player/Fly.gd" id="12_aipc6"]
 [ext_resource type="AudioStream" uid="uid://bire5rjt42wc5" path="res://audio/climbing.mp3" id="13_6gbgl"]
 [ext_resource type="AudioStream" uid="uid://dtgfkwbrdecpa" path="res://audio/landing.mp3" id="14_wilm7"]
 [ext_resource type="AudioStream" uid="uid://c4bxvpiv7sgac" path="res://audio/hit.mp3" id="15_qktho"]
@@ -176,6 +177,9 @@ script = ExtResource("7_5sksq")
 
 [node name="Push" type="Node" parent="StateMachine"]
 script = ExtResource("11_lhwxf")
+
+[node name="Fly" type="Node" parent="StateMachine"]
+script = ExtResource("12_aipc6")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("7_t7u8g")

@@ -4,6 +4,7 @@ var game_scale = 3
 var current_level
 var torches_lit = 0
 var door
+var test_modes = {"fly" : false, "pan" : false, "no collision" : false, "illuminate" : false}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,7 +34,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	camera_control()
+	test_mode_settings()
+	
+	camera_control(delta)
 	
 	if torches_lit == current_level.torch_count and door.locked :
 		door.unlock()
@@ -47,11 +50,56 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("k"):
 		$Player.key_count += 1
-		
-func camera_control():
 	
-	$Camera.position.x = $Player.position.x
-	$Camera.position.y = $Player.position.y
+	
+func test_mode_settings():
+	
+	if Input.is_action_pressed("control"):
+		
+		test_modes["pan"] = true
+		$Player.process_mode = Node.PROCESS_MODE_DISABLED
+		
+		if Input.is_action_just_pressed("i"):
+			test_modes["illuminate"] = not test_modes["illuminate"]
+			current_level.get_node("DirectionalLight2D").visible = not current_level.get_node("DirectionalLight2D").visible
+		
+		if Input.is_action_just_pressed("f"):
+			test_modes["fly"] = not test_modes["fly"]
+			
+			if test_modes["fly"]:
+				$Player.get_node("StateMachine").transition_to("Fly")
+			else:
+				$Player.get_node("StateMachine").transition_to("Idle")
+
+		if test_modes["fly"]:
+			if Input.is_action_just_pressed("c"):
+				$Player.toggle_collision()
+				test_modes["no collision"] = not test_modes["no collision"]
+				
+	else:
+		test_modes["pan"] = false
+		$Player.process_mode = Node.PROCESS_MODE_PAUSABLE
+		
+	if not test_modes["fly"]:
+		$Player.get_node("CollisionShape2D").disabled = false
+		test_modes["no collision"] = false
+		
+func camera_control(delta):
+	
+	var cam_speed = 400
+	if not test_modes["pan"]:
+		$Camera.position.x = $Player.position.x
+		$Camera.position.y = $Player.position.y
+	else:
+		if Input.is_action_pressed("up"):
+			print("moving up")
+			$Camera.position.y -= delta * cam_speed
+		elif Input.is_action_pressed("down"):
+			$Camera.position.y += delta * cam_speed
+		if Input.is_action_pressed("left"):
+			$Camera.position.x -= delta * cam_speed
+		elif Input.is_action_pressed("right"):
+			$Camera.position.x += delta * cam_speed
 
 
 func set_camera_limit():
@@ -62,7 +110,6 @@ func set_camera_limit():
 	$Camera.set_limit(SIDE_TOP, 0)
 	$Camera.set_limit(SIDE_RIGHT, tilemap_rect.size.x*16*3)
 	$Camera.set_limit(SIDE_BOTTOM, tilemap_rect.size.y*16*3)
-
 
 func _on_player_lit_torch():
 	torches_lit += 1

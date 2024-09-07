@@ -130,3 +130,7 @@ func get_hit():
 	$StateMachine.transition_to("Die")
 	$HitAudio.play()
 	hit.emit()
+	
+func toggle_collision():
+	$CollisionShape2D.disabled = not $CollisionShape2D.disabled
+	print("Player collision " + str($CollisionShape2D.disabled))
