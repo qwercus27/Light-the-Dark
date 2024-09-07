@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgsqs60jkler1"]
+
+[ext_resource type="PackedScene" uid="uid://k06n1rsvlctv" path="res://scenes/environment/light ray/light_ray.tscn" id="1_l8dx4"]
+[ext_resource type="Texture2D" uid="uid://cy0hdc0pou5t6" path="res://scenes/environment/light ray/light_ray_hard_fade.png" id="2_0iav7"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qx4xo"]
+polygon = PackedVector2Array(0.0078125, 32.4766, 0, 0, 32.5625, -0.015625, 59, 71, 36, 2, 33, -1, -1, -1, -1, 32, 9, 92)
+
+[sub_resource type="Gradient" id="Gradient_0aha6"]
+offsets = PackedFloat32Array(0, 0.467532, 0.746753, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.376623, 0.376623, 0.376623, 1, 0.649788, 0.649788, 0.649788, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l1jaa"]
+gradient = SubResource("Gradient_0aha6")
+fill_from = Vector2(0.513761, 1)
+fill_to = Vector2(0.490826, 0.0137615)
+
+[node name="Window" type="Node2D"]
+metadata/_edit_vertical_guides_ = [32.0, 33.0, 0.0, -1.0]
+metadata/_edit_horizontal_guides_ = [32.0, 33.0, 0.0, -1.0]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_qx4xo")
+
+[node name="TestRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -14.0
+offset_top = -3.0
+offset_right = 98.0
+offset_bottom = 134.0
+color = Color(0.13, 0.13, 0.13, 1)
+
+[node name="NightSkyRect" type="ColorRect" parent="."]
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color(0.0884, 0.0918667, 0.13, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(27.187, 58.0107)
+rotation = -0.254818
+scale = Vector2(0.608508, 2.01037)
+color = Color(0.510033, 0.792907, 1, 1)
+energy = 0.15
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_l1jaa")
+
+[node name="LightRay2" parent="." instance=ExtResource("1_l8dx4")]
+position = Vector2(27.7455, 62.0717)
+rotation = -0.244346
+scale = Vector2(0.657048, 0.273432)
+color = Color(0.509804, 0.792157, 1, 1)
+energy = 0.6
+shadow_item_cull_mask = 1
+texture = ExtResource("2_0iav7")

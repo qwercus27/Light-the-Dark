@@ -47,8 +47,10 @@ func _on_interact_area_exited(area):
 	if area.is_in_group("ladder"):
 		freeze = false
 		
-func shrink_collision_box():
+func shrink_collision_box(rel_pos):
 	$CollisionShape2D.scale.x = 3.0 * 0.9
+	#$CollisionShape2D.position.x += rel_pos * 1
 	
-func reset_collision_box():
+func reset_collision_box(rel_pos):
 	$CollisionShape2D.scale.x = 3.0
+	#$CollisionShape2D.position.x -= rel_pos * 1

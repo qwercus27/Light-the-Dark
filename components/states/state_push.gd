@@ -26,19 +26,20 @@ func enter(_msg := {}) -> void:
 	box.cleared_block.connect(on_cleared_block)
 	box.hide_hint()
 	box_pos = box.position.x
-	box.shrink_collision_box()
+	
 	
 	if(box_pos*3 > player.position.x):
 		box_rel_pos = 1
 	else:
 		box_rel_pos = -1
 
+	box.shrink_collision_box(box_rel_pos)
 
 func physics_update(delta: float) -> void:
 	
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
-		box.shrink_collision_box()
+		box.shrink_collision_box(box_rel_pos)
 		push_audio.stop()
 		return
 	
@@ -50,7 +51,8 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = direction * player.push_speed
 			sprite.play("push")
 			push_audio.set_stream_paused(false)
-			box.position.x = move_toward(box.position.x, player.position.x/3 + (box_rel_pos * 14), player.push_speed)
+			if(box.linear_velocity.y <= 0):
+				box.position.x = move_toward(box.position.x, player.position.x/3 + (box_rel_pos * 14), player.push_speed)
 	else:
 		
 		player.velocity.x = move_toward(player.velocity.x, 0, player.push_speed)
@@ -67,7 +69,7 @@ func physics_update(delta: float) -> void:
 		box.show_hint()
 		push_audio.stop()
 		push_audio.volume_db = initial_push_db
-		box.reset_collision_box()
+		box.reset_collision_box(box_rel_pos)
 		state_machine.transition_to("Idle")
 		
 	if fade_audio:

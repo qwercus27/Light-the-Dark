@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://k06n1rsvlctv"]
+
+[ext_resource type="Texture2D" uid="uid://l3l4ofutmr3k" path="res://scenes/environment/light ray/light_ray.png" id="1_8k8t0"]
+
+[node name="LightRay" type="PointLight2D"]
+position = Vector2(489.16, 216.18)
+rotation = -0.0872665
+scale = Vector2(0.86858, 0.957377)
+energy = 0.2
+shadow_enabled = true
+shadow_item_cull_mask = 2
+texture = ExtResource("1_8k8t0")
+texture_scale = 0.33
