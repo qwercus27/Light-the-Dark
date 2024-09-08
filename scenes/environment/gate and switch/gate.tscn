@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkuud05rjyyj4"]
+
+[ext_resource type="Texture2D" uid="uid://b4u3lmscoixv6" path="res://scenes/environment/gate and switch/gate.png" id="1_jt7a6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dosjn"]
+size = Vector2(16, 16)
+
+[node name="Gate" type="Node2D"]
+texture_filter = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_dosjn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jt7a6")

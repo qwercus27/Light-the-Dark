@@ -34,7 +34,8 @@ func _on_interact_area_entered(area):
 	if area.is_in_group("player"):
 		show_hint()
 	if area.get_parent() is StaticBody2D:
-		hit_block.emit()
+		if not area.is_in_group("floor switch"):
+			hit_block.emit()
 	if area.is_in_group("ladder"):
 		print("box interacting with ladder")
 		freeze = true

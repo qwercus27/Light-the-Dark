@@ -23,7 +23,7 @@ light and dark
 - level select menu
 - pause menu
 - reset level option
-- testing modes: move camera, turn on directional light, fly, turn off player collision
+
 
 - mob purpose?
 	- moving light source

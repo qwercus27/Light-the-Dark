@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://c2r32fk06udyx"]
+
+[ext_resource type="Texture2D" uid="uid://b4u3lmscoixv6" path="res://scenes/environment/gate and switch/gate.png" id="1_1415i"]
+[ext_resource type="Script" path="res://scenes/environment/gate and switch/gate_and_switch.gd" id="1_lfch7"]
+[ext_resource type="Texture2D" uid="uid://cbsjdx6t6snij" path="res://scenes/environment/floor_switch/floor_switch.png" id="2_qv55c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pplwf"]
+size = Vector2(16, 16)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_41v58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gx63"]
+size = Vector2(14, 1)
+
+[node name="GateAndSwitch" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_lfch7")
+
+[node name="Gate" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Gate"]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate/StaticBody2D"]
+shape = SubResource("RectangleShape2D_pplwf")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Gate"]
+texture = ExtResource("1_1415i")
+metadata/_edit_lock_ = true
+
+[node name="Switch" type="Node2D" parent="."]
+
+[node name="BaseSprite" type="Sprite2D" parent="Switch"]
+position = Vector2(0, 0.5)
+texture = ExtResource("2_qv55c")
+region_enabled = true
+region_rect = Rect2(0, 13, 16, 3)
+metadata/_edit_lock_ = true
+
+[node name="TopBody" type="StaticBody2D" parent="Switch"]
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_41v58")
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Switch/TopBody"]
+polygon = PackedVector2Array(-7, -1, -5, -3, 5, -3, 7, -1)
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Switch/TopBody"]
+position = Vector2(0, -2)
+texture = ExtResource("2_qv55c")
+region_enabled = true
+region_rect = Rect2(0, 11, 16, 2)
+metadata/_edit_lock_ = true
+
+[node name="InteractArea" type="Area2D" parent="Switch/TopBody" groups=["floor switch"]]
+collision_layer = 3
+collision_mask = 6
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Switch/TopBody/InteractArea"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_3gx63")
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="Switch/TopBody/InteractArea" to="." method="_on_interact_area_entered"]
+[connection signal="area_exited" from="Switch/TopBody/InteractArea" to="." method="_on_interact_area_exited"]

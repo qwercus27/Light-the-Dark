@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://dujafntr24urr"]
+
+[ext_resource type="Texture2D" uid="uid://cbsjdx6t6snij" path="res://scenes/environment/floor_switch/floor_switch.png" id="1_5wlk3"]
+[ext_resource type="Script" path="res://scenes/environment/floor_switch/floor_switch.gd" id="1_j1prt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m0dnu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlcgl"]
+size = Vector2(14, 1)
+
+[node name="FloorSwitch" type="Node2D"]
+texture_filter = 1
+position = Vector2(0, 1)
+script = ExtResource("1_j1prt")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+position = Vector2(0, 0.5)
+texture = ExtResource("1_5wlk3")
+region_enabled = true
+region_rect = Rect2(0, 13, 16, 3)
+
+[node name="TopBody" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_m0dnu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TopBody"]
+polygon = PackedVector2Array(-7, -1, -5, -3, 5, -3, 7, -1)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopBody"]
+position = Vector2(0, -2)
+texture = ExtResource("1_5wlk3")
+region_enabled = true
+region_rect = Rect2(0, 11, 16, 2)
+
+[node name="InteractArea" type="Area2D" parent="TopBody" groups=["floor switch"]]
+collision_layer = 3
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopBody/InteractArea"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_rlcgl")
+
+[connection signal="area_entered" from="TopBody/InteractArea" to="." method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="TopBody/InteractArea" to="." method="_on_interact_area_area_exited"]
