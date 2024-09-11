@@ -16,6 +16,7 @@ fill_from = Vector2(0.513761, 1)
 fill_to = Vector2(0.490826, 0.0137615)
 
 [node name="Window" type="Node2D"]
+position = Vector2(-8, -8)
 metadata/_edit_vertical_guides_ = [32.0, 33.0, 0.0, -1.0]
 metadata/_edit_horizontal_guides_ = [32.0, 33.0, 0.0, -1.0]
 

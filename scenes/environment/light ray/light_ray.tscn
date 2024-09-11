@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://l3l4ofutmr3k" path="res://scenes/environment/light ray/light_ray.png" id="1_8k8t0"]
 
 [node name="LightRay" type="PointLight2D"]
-position = Vector2(489.16, 216.18)
+position = Vector2(20.16, 227.18)
 rotation = -0.0872665
 scale = Vector2(0.86858, 0.957377)
 energy = 0.2
@@ -11,3 +11,11 @@ shadow_enabled = true
 shadow_item_cull_mask = 2
 texture = ExtResource("1_8k8t0")
 texture_scale = 0.33
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -111.176
+offset_top = -251.219
+offset_right = 98.8237
+offset_bottom = 267.781
+color = Color(0.321728, 0.321728, 0.321728, 1)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdxuapkbp46go"]
+
+[ext_resource type="Texture2D" uid="uid://ccdpil2ieddvg" path="res://scenes/environment/falling_block/falling_block.png" id="1_fqynp"]
+[ext_resource type="Script" path="res://scenes/environment/falling_block/falling_block.gd" id="1_ngf8b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbdtk"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmamj"]
+size = Vector2(16, 1)
+
+[node name="FallingBlock" type="RigidBody2D"]
+texture_filter = 1
+script = ExtResource("1_ngf8b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_fqynp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bbdtk")
+
+[node name="Interact" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interact"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_lmamj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="area_entered" from="Interact" to="." method="_on_interact_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

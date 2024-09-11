@@ -37,6 +37,7 @@ func _ready():
 	key_count = 0
 	$Interact.set_monitorable(true)
 	$CollisionShape2D.disabled = false
+	$Hurtbox/CollisionShape2D.disabled = false
 	velocity.y = 0
 	$RunningAudio.volume_db = -10
 	$AnimatedSprite2D.stop()

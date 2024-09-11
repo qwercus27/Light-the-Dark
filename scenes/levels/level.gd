@@ -14,7 +14,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$DirectionalLight2D.energy = .5 - ($LightsOnTimer.time_left * .5)
+	$DirectionalLight2D.energy = .25 - ($LightsOnTimer.time_left * .25)
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered():

@@ -14,16 +14,35 @@ light and dark
 - windows / "curtain" switches
 - glowing mobs
 - lava
-- gates, need switch
+- release lava so it flows/fills a path
 - switch activates one item, deactivates another
-- push blocks - opens one path, closes another
 - mob guarding light source
 - light generating mob behind gate
+- moving platforms
+- floor switch turns on light only while pressed
+- spikes (same effect as lava but without light)
+- springs
+- wall jump
+- ledge grab
+- should you be able to fight mobs?
+- falling blocks
+
+
+Mobs:
+- glowing
+- on fire
+- floating square path
+- walk on walls/ceiling
+- shoot fire
+- electric
+- fixed in place + projectile
+- can jump on
+- ghost / moves through walls
+
 
 - level select menu
 - pause menu
 - reset level option
-
 
 - mob purpose?
 	- moving light source
@@ -36,6 +55,8 @@ light and dark
 	- rest on switch
 	- clear a path
 		- multiple blocks in one spot
+	- clear one path, block another
 next:
 
-- gate and switch
+- new mob(s)
+

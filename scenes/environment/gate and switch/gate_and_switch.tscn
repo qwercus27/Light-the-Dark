@@ -31,13 +31,6 @@ metadata/_edit_lock_ = true
 
 [node name="Switch" type="Node2D" parent="."]
 
-[node name="BaseSprite" type="Sprite2D" parent="Switch"]
-position = Vector2(0, 0.5)
-texture = ExtResource("2_qv55c")
-region_enabled = true
-region_rect = Rect2(0, 13, 16, 3)
-metadata/_edit_lock_ = true
-
 [node name="TopBody" type="StaticBody2D" parent="Switch"]
 collision_layer = 4
 collision_mask = 7
@@ -63,6 +56,13 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Switch/TopBody/InteractArea"]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_3gx63")
+metadata/_edit_lock_ = true
+
+[node name="BaseSprite" type="Sprite2D" parent="Switch"]
+position = Vector2(0, 0.5)
+texture = ExtResource("2_qv55c")
+region_enabled = true
+region_rect = Rect2(0, 13, 16, 3)
 metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="Switch/TopBody/InteractArea" to="." method="_on_interact_area_entered"]
