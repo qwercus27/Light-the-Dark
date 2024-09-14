@@ -18,14 +18,12 @@ light and dark
 - switch activates one item, deactivates another
 - mob guarding light source
 - light generating mob behind gate
-- moving platforms
 - floor switch turns on light only while pressed
-- spikes (same effect as lava but without light)
 - springs
 - wall jump
 - ledge grab
 - should you be able to fight mobs?
-- falling blocks
+- falling blocks from above
 
 
 Mobs:

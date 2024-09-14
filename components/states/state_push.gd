@@ -13,6 +13,7 @@ var initial_push_db
 
 func enter(_msg := {}) -> void:
 
+	#print("entered push state")
 	sprite = player.get_node("AnimatedSprite2D")
 	sprite.play("push")
 	
@@ -45,11 +46,12 @@ func physics_update(delta: float) -> void:
 		
 	if not player.is_on_floor():
 		state_machine.transition_to("Air")
-		box.shrink_collision_box(box_rel_pos)
+		box.reset_collision_box(box_rel_pos)
 		push_audio.stop()
 		return
 	
 	direction = Input.get_axis("left", "right")
+	
 
 	if direction:
 		
@@ -57,7 +59,7 @@ func physics_update(delta: float) -> void:
 			player.velocity.x = direction * player.push_speed
 			sprite.play("push")
 			push_audio.set_stream_paused(false)
-			if(box.linear_velocity.y <= 0):
+			if(box.linear_velocity.y <= 0 or box.on_moving_platform):
 				box.position.x = move_toward(box.position.x, player.position.x/3 + (box_rel_pos * 14), player.push_speed)
 	else:
 		
@@ -94,10 +96,12 @@ func on_hit_block():
 	if direction < 0:
 		left_clear = false
 	fade_audio = true
+	print("push: hit block emitted")
 
 
 func on_cleared_block():
 	right_clear = true
 	left_clear = true
+	print("push: cleared block emitted")
 
 

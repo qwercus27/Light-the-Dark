@@ -5,7 +5,7 @@ func enter(_msg := {}) -> void:
 
 	player.velocity.x = 0
 	player.get_node("AnimatedSprite2D").play("idle")
-	
+	#print("entered idle state")
 	
 func update(delta: float) -> void:
 		

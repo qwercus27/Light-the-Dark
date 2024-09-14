@@ -52,6 +52,7 @@ func _physics_process(delta):
 	if can_push:
 		if Input.is_action_just_pressed("a"):
 			grabbed_box.emit()
+
 			
 	if can_drop:
 		if Input.is_action_just_pressed("down"):
