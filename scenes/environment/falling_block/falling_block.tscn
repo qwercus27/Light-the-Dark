@@ -33,7 +33,6 @@ position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_lmamj")
 
 [node name="FallTimer" type="Timer" parent="."]
-wait_time = 2.0
 one_shot = true
 
 [node name="ResetTimer" type="Timer" parent="."]

@@ -11,7 +11,6 @@ func _ready():
 		$LitTorch.turn_on()
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$DirectionalLight2D.energy = .25 - ($LightsOnTimer.time_left * .25)

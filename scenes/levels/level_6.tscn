@@ -59,4 +59,11 @@ position = Vector2(112, 16)
 [node name="Switch" parent="GateAndSwitch" index="1"]
 position = Vector2(32, 25)
 
+[node name="GateAndSwitch2" parent="." index="12" instance=ExtResource("5_g1v4t")]
+position = Vector2(216, 392)
+
+[node name="Switch" parent="GateAndSwitch2" index="1"]
+position = Vector2(-45.9999, 41)
+
 [editable path="GateAndSwitch"]
+[editable path="GateAndSwitch2"]
