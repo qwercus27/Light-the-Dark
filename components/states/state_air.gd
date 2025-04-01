@@ -8,7 +8,8 @@ func enter(msg := {}) -> void:
 		#player.get_node("JumpAudio").play(0.0)
 	player.get_node("AnimatedSprite2D").play("jump")
 	player.get_node("LandingAudio").volume_db = -12
-	#print("entered air state")
+	player.platform_area = null
+	print("entered air state")
 
 func physics_update(delta: float) -> void:
 	
@@ -31,7 +32,8 @@ func physics_update(delta: float) -> void:
 	if(player.get_node("LandingAudio").volume_db < 0):
 		player.get_node("LandingAudio").volume_db += 0.2
 	
-	
+	if player.platform_area:
+		state_machine.transition_to("Idle")
 	if player.is_on_floor():
 		if is_equal_approx(player.velocity.x, 0.0):
 			player.get_node("LandingAudio").play()

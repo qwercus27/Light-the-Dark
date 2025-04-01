@@ -6,6 +6,7 @@ signal switch_pressed
 signal switch_released
 
 var pressed = false
+var y_goal = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +20,16 @@ func _process(delta):
 		descend(delta)
 	else:
 		ascend(delta)
-
+	
+	var y_rate = 0.05
+	if $Gate/Mask/Sprite2D.position.y > y_goal:
+		$Gate/Mask/Sprite2D.position.y -= y_rate
+		if $Gate/Mask/Sprite2D.position.y - y_goal < 0.1:
+			$Gate/Mask/Sprite2D.position.y = y_goal
+	elif $Gate/Mask/Sprite2D.position.y < y_goal:
+		$Gate/Mask/Sprite2D.position.y += y_rate
+		if $Gate/Mask/Sprite2D.position.y - y_goal > -0.1:
+			$Gate/Mask/Sprite2D.position.y = y_goal
 
 func descend(delta):
 	if pressed == false:
@@ -41,12 +51,19 @@ func ascend(delta):
 			pressed = false
 
 func open_gate():
+	y_goal = 1
 	$Gate/StaticBody2D/CollisionShape2D.disabled = true
-	$Gate/Sprite2D.visible = false
+	#$Gate/Sprite2D.visible = false
+	$AudioStreamPlayer2D.pitch_scale = 1
+	$AudioStreamPlayer2D.play()
+	
 	
 func close_gate():
+	y_goal = 0
 	$Gate/StaticBody2D/CollisionShape2D.disabled = false
-	$Gate/Sprite2D.visible = true
+	#$Gate/Mask/Sprite2D.visible = true
+	$AudioStreamPlayer2D.pitch_scale = 0.85
+	$AudioStreamPlayer2D.play()
 	
 func _on_interact_area_entered(area):
 	area_count += 1

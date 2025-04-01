@@ -23,6 +23,7 @@ metadata/_edit_horizontal_guides_ = [32.0, 33.0, 0.0, -1.0]
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 occluder = SubResource("OccluderPolygon2D_qx4xo")
+occluder_light_mask = 2
 
 [node name="TestRect" type="ColorRect" parent="."]
 visible = false
@@ -44,6 +45,7 @@ scale = Vector2(0.608508, 2.01037)
 color = Color(0.510033, 0.792907, 1, 1)
 energy = 0.15
 shadow_enabled = true
+shadow_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_l1jaa")
 
 [node name="LightRay2" parent="." instance=ExtResource("1_l8dx4")]
@@ -52,5 +54,4 @@ rotation = -0.244346
 scale = Vector2(0.657048, 0.273432)
 color = Color(0.509804, 0.792157, 1, 1)
 energy = 0.6
-shadow_item_cull_mask = 1
 texture = ExtResource("2_0iav7")

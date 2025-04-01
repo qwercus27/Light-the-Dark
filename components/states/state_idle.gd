@@ -2,20 +2,22 @@ extends PlayerState
 
 
 func enter(_msg := {}) -> void:
-
+	#print("entered idle state")
+	
 	player.velocity.x = 0
 	player.get_node("AnimatedSprite2D").play("idle")
-	#print("entered idle state")
 	
 func update(delta: float) -> void:
 		
 	if not player.is_on_floor():
-		state_machine.transition_to("Air")
-		return
+		if not player.platform_area:
+			state_machine.transition_to("Air")
+			return
 	
 	player.velocity.y += player.gravity * delta
 	
-	player.move_and_slide()
+	if not player.platform_area:
+		player.move_and_slide()
 	
 	if Input.is_action_just_pressed("down"):
 		state_machine.transition_to("Crouch")

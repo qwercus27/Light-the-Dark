@@ -137,7 +137,7 @@ func change_level(level_id):
 
 func _on_next_level_timer_timeout():
 	
-	if current_level.level_name == "Level 5":
+	if current_level.level_name == "Level 8":
 		Global.current_level = load("res://scenes/levels/level_1.tscn")
 		get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
 	else:

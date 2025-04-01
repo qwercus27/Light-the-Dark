@@ -23,11 +23,15 @@ var current_one_way
 var current_torch
 var current_lock
 var current_box
+var platform_area
+var platform_initial_pos
+var platform_player_initial_pos
 
 var key_count = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var default_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = default_gravity
 
 func _ready():
 	scale = Vector2(3,3)
@@ -74,11 +78,6 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("a"):
 			current_lock.unlock()
 			key_count -= 1
-	#if not is_on_floor():
-		#if(can_drop == true):
-			#print("cannot drop")
-		#can_drop = false
-		
 
 
 func _on_interact_area_entered(area):
@@ -123,7 +122,25 @@ func _on_interact_area_exited(area):
 		can_unlock = false
 	if area.is_in_group("box"):
 		can_push = false
+
+
+func _on_groundbox_area_entered(area):
+	
+	if area.is_in_group("moving platform"):
+		platform_area = area
+		platform_initial_pos = area.global_position
+		platform_player_initial_pos = position
 		
+		area.get_parent().get_node("CollisionShape2D").disabled = true
+		$StateMachine.transition_to("Platform Idle", {p_area = area})
+		
+		
+func _on_groundbox_area_exited(area):
+	
+	if area.is_in_group("moving platform"):
+		platform_area = null
+		area.get_parent().get_node("CollisionShape2D").disabled = false
+			
 func exit(x_pos):
 	$StateMachine.transition_to("Exit", {door_x = x_pos})
 
@@ -136,3 +153,9 @@ func get_hit():
 func toggle_collision():
 	$CollisionShape2D.disabled = not $CollisionShape2D.disabled
 	print("Player collision " + str($CollisionShape2D.disabled))
+
+
+
+
+
+

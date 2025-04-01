@@ -18,7 +18,7 @@ var pr
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PauseTimer.wait_time = pause_time
+	
 	speed = stopping_speed
 	pr = $PathFollow2D.progress_ratio
 	if auto_start:
@@ -42,7 +42,7 @@ func _physics_process(delta):
 			pr = 1
 			paused = true
 			moving = false
-			$PauseTimer.start()
+			$PauseTimer.start(pause_time)
 		else:
 			change_direction()
 	if pr < 0.01 and moving and direction == -1:
@@ -50,7 +50,7 @@ func _physics_process(delta):
 			pr = 0
 			paused = true
 			moving = false
-			$PauseTimer.start()
+			$PauseTimer.start(pause_time)
 		else:
 			change_direction()
 	

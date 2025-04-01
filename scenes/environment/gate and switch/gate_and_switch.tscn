@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2r32fk06udyx"]
+[gd_scene load_steps=9 format=3 uid="uid://c2r32fk06udyx"]
 
 [ext_resource type="Texture2D" uid="uid://b4u3lmscoixv6" path="res://scenes/environment/gate and switch/gate.png" id="1_1415i"]
 [ext_resource type="Script" path="res://scenes/environment/gate and switch/gate_and_switch.gd" id="1_lfch7"]
 [ext_resource type="Texture2D" uid="uid://cbsjdx6t6snij" path="res://scenes/environment/floor_switch/floor_switch.png" id="2_qv55c"]
+[ext_resource type="AudioStream" uid="uid://v3vfjjph8vuc" path="res://audio/gate_open.mp3" id="4_ao2aq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pplwf"]
 size = Vector2(16, 16)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_boo2e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_41v58"]
 
@@ -25,7 +28,14 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_pplwf")
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Gate"]
+[node name="Mask" type="Sprite2D" parent="Gate"]
+clip_children = 1
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(16, 16)
+texture = SubResource("CanvasTexture_boo2e")
+
+[node name="Sprite2D" type="Sprite2D" parent="Gate/Mask"]
+scale = Vector2(0.0625, 0.0625)
 texture = ExtResource("1_1415i")
 metadata/_edit_lock_ = true
 
@@ -64,6 +74,9 @@ texture = ExtResource("2_qv55c")
 region_enabled = true
 region_rect = Rect2(0, 13, 16, 3)
 metadata/_edit_lock_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ao2aq")
 
 [connection signal="area_entered" from="Switch/TopBody/InteractArea" to="." method="_on_interact_area_entered"]
 [connection signal="area_exited" from="Switch/TopBody/InteractArea" to="." method="_on_interact_area_exited"]
