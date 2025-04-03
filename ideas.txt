@@ -1,13 +1,13 @@
 light and dark
- + duck
- + camera angles
- + cursed buffs
 
 - lights turn off rhythmically
 - enemies' eyes and platforms are only visible in the dark
 	- or silhouettes
 
-
+- multiple platforms moving in circle around same axis
+- longer one-way platforms, floating ones?
+- implement falling blocks
+- projectile moving through patches of light and dark
 - torches / braziers
 - fire arrows
 - electric lights / switches
@@ -19,7 +19,7 @@ light and dark
 - mob guarding light source
 - light generating mob behind gate
 - floor switch turns on light only while pressed
-- springs
+- springs (upward, diagonal, sideways, etc)
 - wall jump
 - ledge grab
 - should you be able to fight mobs?

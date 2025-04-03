@@ -1,0 +1,102 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx8fpw0n733e4"]
+
+[ext_resource type="Script" path="res://scenes/environment/circular_platform/circular_platform.gd" id="1_1jg8b"]
+[ext_resource type="Texture2D" uid="uid://2frrxugjd6bl" path="res://scenes/environment/moving platform/moving_platform.png" id="1_hxcno"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3camt"]
+size = Vector2(32, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fsgqn"]
+size = Vector2(32, 3)
+
+[node name="CircularPlatform" type="Node2D"]
+position = Vector2(96, 48)
+script = ExtResource("1_1jg8b")
+
+[node name="Center" type="Node2D" parent="."]
+
+[node name="Point1" type="Node2D" parent="Center"]
+position = Vector2(-48, 0)
+
+[node name="Point2" type="Node2D" parent="Center"]
+position = Vector2(48, 0)
+
+[node name="Point3" type="Node2D" parent="Center"]
+position = Vector2(0, 48)
+
+[node name="Point4" type="Node2D" parent="Center"]
+position = Vector2(0, -48)
+
+[node name="Platform1" type="AnimatableBody2D" parent="."]
+position = Vector2(-48, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+texture_filter = 1
+texture = ExtResource("1_hxcno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_3camt")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="Platform1" groups=["moving platform"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1/Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fsgqn")
+
+[node name="Platform2" type="AnimatableBody2D" parent="."]
+position = Vector2(48, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+texture_filter = 1
+texture = ExtResource("1_hxcno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_3camt")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="Platform2" groups=["moving platform"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2/Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fsgqn")
+
+[node name="Platform3" type="AnimatableBody2D" parent="."]
+visible = false
+position = Vector2(0, -48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3"]
+texture_filter = 1
+texture = ExtResource("1_hxcno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_3camt")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="Platform3" groups=["moving platform"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3/Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fsgqn")
+
+[node name="Platform4" type="AnimatableBody2D" parent="."]
+visible = false
+position = Vector2(0, 48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4"]
+texture_filter = 1
+texture = ExtResource("1_hxcno")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_3camt")
+one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="Platform4" groups=["moving platform"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4/Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_fsgqn")

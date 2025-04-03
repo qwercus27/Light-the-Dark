@@ -34,7 +34,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oij4h"]
-size = Vector2(40, 40)
+size = Vector2(30, 30)
 
 [node name="Torch" type="Node2D" groups=["torch"]]
 script = ExtResource("1_v56t4")

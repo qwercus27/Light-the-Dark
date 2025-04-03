@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://87ks78rsj6hm"]
+[gd_scene load_steps=39 format=3 uid="uid://87ks78rsj6hm"]
 
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_ord5s"]
 [ext_resource type="PackedScene" uid="uid://dgsqs60jkler1" path="res://scenes/environment/window.tscn" id="3_d041f"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://0a3oewh432m7" path="res://images/tileset_2.png" id="9_5eytx"]
 [ext_resource type="PackedScene" uid="uid://b614usy4lt1ps" path="res://scenes/environment/spikes/spikes.tscn" id="10_0e8a2"]
 [ext_resource type="PackedScene" uid="uid://bdxuapkbp46go" path="res://scenes/environment/falling_block/falling_block.tscn" id="11_nt1mi"]
+[ext_resource type="Texture2D" uid="uid://jkfnjvwngrxh" path="res://scenes/environment/one way platform/one way platform.png" id="13_dhig7"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ep0xb"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -659,6 +660,20 @@ scenes/7/scene = ExtResource("11_nt1mi")
 resource_name = "Mobs"
 scenes/1/scene = ExtResource("8_v1bpx")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_02ynr"]
+resource_name = "1-Way"
+texture = ExtResource("13_dhig7")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, -8, -4, 8, -4, 8, -8)
+0:0/0/physics_layer_0/polygon_0/one_way = true
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, -4, -8, -4)
+1:0/0/physics_layer_0/polygon_0/one_way = true
+
 [sub_resource type="TileSet" id="TileSet_af13f"]
 occlusion_layer_0/light_mask = 1
 occlusion_layer_1/light_mask = 2
@@ -672,6 +687,7 @@ sources/3 = SubResource("TileSetScenesCollectionSource_f4pse")
 sources/2 = SubResource("TileSetScenesCollectionSource_wreku")
 sources/4 = SubResource("TileSetScenesCollectionSource_urbuc")
 sources/1 = SubResource("TileSetScenesCollectionSource_2q4ad")
+sources/5 = SubResource("TileSetAtlasSource_02ynr")
 
 [node name="level" type="Node2D"]
 scale = Vector2(3, 3)
